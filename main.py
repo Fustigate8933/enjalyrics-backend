@@ -29,7 +29,8 @@ from sqlalchemy.ext.declarative import declarative_base
 
 # engine = db.create_engine("sqlite+pysqlite:///./enja.db")
 load_dotenv()
-db_pass = os.getenv("DATABASE_PASSWORD")
+# db_pass = os.getenv("DATABASE_PASSWORD")
+db_pass = os.environ.get("SUPABASE_PASSWORD")
 engine = db.create_engine(f"postgresql+psycopg2://postgres.axbrinbwdfzotjdqheek:{db_pass}@aws-0-us-east-1.pooler.supabase.com:6543/postgres")
 connection = engine.connect()
 inspector = Inspector.from_engine(engine)
