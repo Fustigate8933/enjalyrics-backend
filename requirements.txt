@@ -3,3 +3,4 @@ python-dotenv
 lyricsgenius
 SQLAlchemy
 pydantic
+psycopg2-binary
