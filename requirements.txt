@@ -4,3 +4,4 @@ lyricsgenius
 SQLAlchemy
 pydantic
 psycopg2-binary
+tenacity

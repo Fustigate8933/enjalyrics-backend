@@ -6,7 +6,16 @@ from models import *
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 import os
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+from sqlalchemy.exc import PendingRollbackError
 
+@retry(stop=stop_after_attempt(5), wait=wait_exponential(multiplier=1, min=4, max=10), retry=retry_if_exception_type(PendingRollbackError))
+def commit_session():
+    try:
+        session.commit()
+    except PendingRollbackError:
+        session.rollback()
+        raise
 
 print("\n", "-" * 20)
 
